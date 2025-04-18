@@ -57,19 +57,20 @@ fun main() {
             hashMapOf(
                     "1" to numberGuessingGame::steps,
             )
-
-    println("""
+    while (true) {
+        println("""
         1. numberGuessingGame
         2.
 
         """)
-    print("with game do you want to play? ")
+        print("with game do you want to play? ")
 
-    var game = readln()
-    try {
-        game.toInt()
-        mapOfGames[game]?.invoke()
-    } catch (e: NumberFormatException) {
-        println("that is not a answer")
+        var game = readln()
+        try {
+            game.toInt()
+            mapOfGames[game]?.invoke()
+        } catch (e: NumberFormatException) {
+            println("that is not a answer")
+        }
     }
 }
