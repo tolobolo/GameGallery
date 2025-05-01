@@ -19,7 +19,6 @@ class NumberGuessingGame {
     }
 
     fun steps() {
-        println("starting")
         val random_number = Random.nextInt(0, 100)
 
         var win: Boolean = false
@@ -86,7 +85,6 @@ class TickTackToe {
         println("$symbol has won")
     }
     fun checkThreeInRow(): Boolean {
-        println("check three in row")
 
         for (list in this.board) {
             if (list.all { it == this.symbol }) {
@@ -105,10 +103,10 @@ class TickTackToe {
             return false
         }
         // nedover
-        var a = 0
+        var a: Int
         for (i in 0..2) {
+            a = 0
             for (list in this.board) {
-                a = 0
                 if (list[i] == this.symbol) {
                     a = a + 1
                 }
@@ -118,7 +116,6 @@ class TickTackToe {
                 return false
             }
         }
-        println("not a win")
         return true
     }
 
