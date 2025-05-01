@@ -87,6 +87,7 @@ class TickTackToe {
     }
     fun checkThreeInRow(): Boolean {
         println("check three in row")
+
         for (list in this.board) {
             if (list.all { it == this.symbol }) {
                 win()
@@ -123,8 +124,8 @@ class TickTackToe {
 
     fun choiceSymbol() {
         if (this.symbol == "x") {
-            this.symbol = "o"
-        } else if (this.symbol == "o") {
+            this.symbol = "O"
+        } else if (this.symbol == "O") {
             this.symbol = "x"
         } else {
             println("somthing is wrong")
@@ -132,7 +133,7 @@ class TickTackToe {
     }
 
     fun steps() {
-        this.symbol = "x"
+        this.symbol = "O"
         this.board =
                 mutableListOf(
                         mutableListOf("0", "1", "2"),
@@ -141,9 +142,9 @@ class TickTackToe {
                 )
 
         while (true == checkThreeInRow()) {
+            choiceSymbol()
             printBoard()
             placeOnBoard()
-            choiceSymbol()
         }
     }
 }
