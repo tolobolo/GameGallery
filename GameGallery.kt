@@ -51,20 +51,118 @@ class NumberGuessingGame {
     }
 }
 
+class TickTackToe {
+    var board: MutableList<MutableList<String>>
+    var symbol: String
+
+    init {
+        this.board =
+                mutableListOf(
+                        mutableListOf("0", "1", "2"),
+                        mutableListOf("3", "4", "5"),
+                        mutableListOf("6", "7", "8")
+                )
+        this.symbol = "x"
+    }
+    fun printBoard() {
+        for (line in this.board) {
+            println(line)
+        }
+    }
+    fun placeOnBoard() {
+        print("where do you want to place your (write the number it is on)")
+        var placeToPlace = readln()
+
+        for (line: MutableList<String> in this.board) {
+            if (line.contains(placeToPlace)) {
+                for ((colIndex, tile) in line.withIndex()) if (placeToPlace == tile) {
+                    line[colIndex] = this.symbol
+                    return
+                }
+            }
+        }
+    }
+    fun win() {
+        println("$symbol has won")
+    }
+    fun checkThreeInRow(): Boolean {
+        println("check three in row")
+        for (list in this.board) {
+            if (list.all { it == this.symbol }) {
+                win()
+                return false
+            }
+        }
+        if (this.board[0][0] == this.symbol &&
+                        this.board[1][1] == this.symbol &&
+                        this.board[2][2] == this.symbol ||
+                        this.board[2][2] == this.symbol &&
+                                this.board[1][1] == this.symbol &&
+                                this.board[0][0] == this.symbol
+        ) {
+            win()
+            return false
+        }
+        // nedover
+        var a = 0
+        for (i in 0..2) {
+            for (list in this.board) {
+                a = 0
+                if (list[i] == this.symbol) {
+                    a = a + 1
+                }
+            }
+            if (a >= 3) {
+                win()
+                return false
+            }
+        }
+        println("not a win")
+        return true
+    }
+
+    fun choiceSymbol() {
+        if (this.symbol == "x") {
+            this.symbol = "o"
+        } else if (this.symbol == "o") {
+            this.symbol = "x"
+        } else {
+            println("somthing is wrong")
+        }
+    }
+
+    fun steps() {
+        this.symbol = "x"
+        this.board =
+                mutableListOf(
+                        mutableListOf("0", "1", "2"),
+                        mutableListOf("3", "4", "5"),
+                        mutableListOf("6", "7", "8")
+                )
+
+        while (true == checkThreeInRow()) {
+            printBoard()
+            placeOnBoard()
+            choiceSymbol()
+        }
+    }
+}
+
 fun main() {
     val numberGuessingGame = NumberGuessingGame()
+    val tickTackToe = TickTackToe()
     val mapOfGames: Map<String, () -> Unit> =
             hashMapOf(
                     "1" to numberGuessingGame::steps,
+                    "2" to tickTackToe::steps,
             )
     while (true) {
         println("""
-        1. numberGuessingGame
-        2.
+        1. NumberGuessingGame
+        2. TickTackToe
 
         """)
-        print("with game do you want to play? ")
-
+        print("with game do you want to play? (write the number behined the game)")
         var game = readln()
         try {
             game.toInt()
