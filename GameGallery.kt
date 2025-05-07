@@ -83,6 +83,7 @@ class TickTackToe {
     }
     fun win() {
         println("$symbol has won")
+        printBoard()
     }
     fun checkThreeInRow(): Boolean {
 
@@ -95,9 +96,9 @@ class TickTackToe {
         if (this.board[0][0] == this.symbol &&
                         this.board[1][1] == this.symbol &&
                         this.board[2][2] == this.symbol ||
-                        this.board[2][2] == this.symbol &&
+                        this.board[0][2] == this.symbol &&
                                 this.board[1][1] == this.symbol &&
-                                this.board[0][0] == this.symbol
+                                this.board[2][0] == this.symbol
         ) {
             win()
             return false
@@ -143,7 +144,6 @@ class TickTackToe {
                         mutableListOf("3", "4", "5"),
                         mutableListOf("6", "7", "8")
                 )
-
         while (true == checkThreeInRow()) {
             choiceSymbol()
             printBoard()
