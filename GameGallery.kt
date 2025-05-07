@@ -103,16 +103,22 @@ class TickTackToe {
             return false
         }
         // nedover
-        var a: Int
+        var counter: Int
         for (i in 0..2) {
-            a = 0
+            counter = 0
             for (list in this.board) {
                 if (list[i] == this.symbol) {
-                    a = a + 1
+                    counter = counter + 1
                 }
             }
-            if (a >= 3) {
+            if (counter >= 3) {
                 win()
+                return false
+            }
+        }
+        for (list in this.board) {
+            if (board.flatten().none { it.matches(Regex("[0-8]")) }) {
+                print("its a draw")
                 return false
             }
         }
